@@ -1,15 +1,11 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+	return (
+		<View className='bg-black min-h-screen flex items-center justify-center'>
+			<Text className='text-red-500 text-5xl font-bold leading-tight'>
+				Witaj świecie ReactNative!
+			</Text>
+		</View>
+	);
 }
