@@ -1,6 +1,5 @@
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { Label } from './label';
-import { Input } from './input';
 import { cn } from '@/app/lib/utils';
 import { forwardRef } from 'react';
 
@@ -10,7 +9,7 @@ type FormFieldProps = {
 } & TextInputProps;
 
 export const FormField = forwardRef<TextInput, FormFieldProps>(
-	({ label, error, placeholder, secureTextEntry, className, ...props }, ref) => {
+	({ label, editable, error, placeholder, secureTextEntry, className, ...props }, ref) => {
 		return (
 			<View className='flex flex-col gap-2 w-full'>
 				<Label className={cn('text-foreground', error && 'text-destructive')}>
@@ -26,6 +25,7 @@ export const FormField = forwardRef<TextInput, FormFieldProps>(
 						className,
 					)}
 					placeholderTextColor='#9CA3AF'
+					editable={editable}
 					{...props}
 				/>
 				{error && <Text className='text-sm text-destructive'>{error}</Text>}

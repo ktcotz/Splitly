@@ -1,25 +1,16 @@
 import { Pressable, Text, View } from 'react-native';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller } from 'react-hook-form';
 import { FormField } from '../_ui/form-field';
-import { LoginFormSchema, LoginSchema } from './schemas/login-form-schema';
+import { useLoginForm } from './hooks/useLoginForm';
 
 export const LoginForm = () => {
 	const {
 		control,
 		handleSubmit,
 		formState: { errors, isSubmitting },
-	} = useForm<LoginSchema>({
-		resolver: zodResolver(LoginFormSchema),
-		defaultValues: {
-			email: '',
-			password: '',
-		},
-	});
-
-	const onSubmit = (data: LoginSchema) => {
-		console.log('Login data:', data);
-	};
+		onSubmit,
+		isLoginLoading,
+	} = useLoginForm();
 
 	return (
 		<View className='flex flex-col gap-4'>
@@ -36,6 +27,7 @@ export const LoginForm = () => {
 						autoCapitalize='none'
 						keyboardType='email-address'
 						textContentType='emailAddress'
+						editable={!isLoginLoading}
 					/>
 				)}
 			/>
@@ -51,6 +43,7 @@ export const LoginForm = () => {
 						error={errors.password?.message}
 						value={field.value}
 						onChangeText={field.onChange}
+						editable={!isLoginLoading}
 					/>
 				)}
 			/>
@@ -58,7 +51,8 @@ export const LoginForm = () => {
 			<Pressable
 				className='bg-primary p-3 rounded-xl'
 				onPress={handleSubmit(onSubmit)}
-				disabled={isSubmitting}
+				disabled={isLoginLoading}
+				accessibilityState={{ disabled: isSubmitting || isLoginLoading }}
 			>
 				<Text className='text-white text-center font-semibold'>
 					{isSubmitting ? 'Logowanie...' : 'Zaloguj się'}
