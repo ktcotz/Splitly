@@ -1,7 +1,3 @@
-1. Podglądanie hasła.
+**\*** GŁÓWNE ZADANIE : LOGOWANIE/REJESTRACJA (SYSTEM AUTENTYKACJI I AUTORYZACJI) **\***
 
-2. Finalna logika i a11y.
-
-3. Maksymalny refaktoring, SRP.
-
-4. Tworzenie backendu!
+1. Tworzenie backendu!
